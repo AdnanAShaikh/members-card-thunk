@@ -73,7 +73,7 @@ export const updatePostApi = createAsyncThunk(
       interests: string | string[];
       gender: string;
       address: string;
-      phone: stringr;
+      phone: string;
       image: string;
       region: string;
     };
