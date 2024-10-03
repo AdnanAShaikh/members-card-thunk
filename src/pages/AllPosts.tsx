@@ -214,17 +214,13 @@ const AllPosts: React.FC = () => {
     return false; // Prevent automatic upload
   };
 
-  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    e.preventDefault(); // Prevent the default wheel event behavior
-  };
-
   const handleGenderChange = (e: RadioChangeEvent) => {
     const selectedGender = e.target.value;
     setNewData({ ...newData, gender: selectedGender });
     console.log(e.target.value);
   };
 
-  const handleCheckBox = (checkedValues: string) => {
+  const handleCheckBox = (checkedValues: string | string[]) => {
     setNewData({ ...newData, interests: checkedValues });
     console.log(checkedValues);
   };

@@ -80,7 +80,7 @@ const Create: React.FC = () => {
     console.log(e.target.value);
   };
 
-  const handleCheckBox = (checkedValues: string) => {
+  const handleCheckBox = (checkedValues: string | string[]) => {
     setData({ ...data, interests: checkedValues });
     console.log(checkedValues);
   };
@@ -106,39 +106,20 @@ const Create: React.FC = () => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const isValidEmail = emailPattern.test(data.email);
 
-  const onFinishFailed = async (errorInfo: any) => {
-    message.error("Please fill out all Details !");
-    console.log("Failed:", errorInfo);
-  };
-
   const onFinish = async () => {
     try {
-      const {
-        fname,
-        lname,
-        gender,
-        dob,
-        interests,
-        email,
-        phone,
-        address,
-        pincode,
-        region,
-        image,
-      } = data;
-
       if (
-        !fname ||
-        !lname ||
-        !gender ||
-        !dob ||
-        !interests.length ||
+        !data.fname ||
+        !data.lname ||
+        !data.gender ||
+        !data.dob ||
+        !data.interests.length ||
         !isValidEmail ||
         !isValidPhone ||
-        !address ||
+        !data.address ||
         !isValidPin ||
-        !region ||
-        !image
+        !data.region ||
+        !data.image
       ) {
         message.error("Please Check your Inputs!");
         return;
@@ -416,11 +397,7 @@ const Create: React.FC = () => {
       <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
         Form Details
       </h1>
-      <Form
-        layout="vertical"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
+      <Form layout="vertical" onFinish={onFinish}>
         <Steps current={current} className="w-full">
           {steps.map((item) => (
             <Step key={item.title} title={item.title} />
